@@ -44,4 +44,4 @@ bin/
 ### Bukkit ###
 local.properties
 
-.idea/**/vcs.xml
+.idea/
