@@ -4,6 +4,7 @@ import ru.endlesscode.bukkitgradle.dependencies.spigotApi
 plugins {
     kotlin("jvm") version "1.7.0"
     id("ru.endlesscode.bukkitgradle") version "0.10.1"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
 group = "com.craftschemers"
@@ -24,28 +25,20 @@ dependencies {
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.25")
 }
 
+tasks.shadowJar {
+    minimize()
+}
+
+tasks.assemble {
+    dependsOn(tasks.shadowJar)
+}
+
 tasks.test {
     useJUnitPlatform()
 }
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "17"
-}
-
-tasks.withType<Jar> {
-    // Otherwise you'll get a "No main manifest attribute" error
-    manifest {
-        attributes["Main-Class"] = "com.craftschemers.hub.Hub"
-    }
-
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-    // To add all of the dependencies
-    from(sourceSets.main.get().output)
-
-    dependsOn(configurations.runtimeClasspath)
-    from({
-        configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
-    })
 }
 
 java {
