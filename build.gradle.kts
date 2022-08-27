@@ -5,7 +5,6 @@ plugins {
     kotlin("jvm") version "1.7.0"
     id("ru.endlesscode.bukkitgradle") version "0.10.1"
     id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("io.gitlab.arturbosch.detekt") version "1.21.0"
 }
 
 group = "com.craftschemers"
