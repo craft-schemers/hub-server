@@ -1,0 +1,9 @@
+main: com.craftschemers.hub.Hub
+author: CraftSchemers
+version: 1.0.0
+
+name: Hub
+commands:
+  hub:
+    description: The Hub command.
+    usage: Invalid command. Type "/hub help" for help

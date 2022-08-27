@@ -1,5 +1,6 @@
-package com.craftschemers.hub
+package com.craftschemers.hub.managers
 
+import com.craftschemers.hub.HubPlayer
 import org.bukkit.GameMode
 import org.bukkit.entity.Player
 
