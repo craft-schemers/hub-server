@@ -16,7 +16,6 @@ class Events : Listener {
 
     @EventHandler
     fun onPlayerConnect(event: PlayerJoinEvent) {
-        // TODO: in the future, we will want to use a db to lookup information to retrieve
         playerDataManager.addPlayer(event.player)
     }
 

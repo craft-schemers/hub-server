@@ -19,7 +19,9 @@ class Hub : JavaPlugin() {
         setupMinigames()
     }
 
-    override fun onDisable() {}
+    override fun onDisable() {
+        // save to db
+    }
 
     private fun setupMinigames() {
         this.server.pluginManager.registerEvents(Events(), this)
