@@ -7,7 +7,7 @@ class HubPlayerManager {
     private var players = mutableMapOf<String, HubPlayer>()
 
     fun addPlayer(player: Player) {
-        players[player.name] = HubPlayer(player)
+        players[player.uniqueId.toString()] = HubPlayer(player)
         player.gameMode = GameMode.ADVENTURE
         player.inventory.clear()
     }
