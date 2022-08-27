@@ -4,6 +4,7 @@ import ru.endlesscode.bukkitgradle.dependencies.spigotApi
 plugins {
     kotlin("jvm") version "1.7.0"
     id("ru.endlesscode.bukkitgradle") version "0.10.1"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
 group = "com.craftschemers"
@@ -18,9 +19,18 @@ repositories {
 dependencies {
     compileOnly(spigotApi)
 
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.10")
     testImplementation("com.github.seeseemelk:MockBukkit-v1.18:2.2.0")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.25")
+}
+
+tasks.shadowJar {
+    minimize()
+}
+
+tasks.assemble {
+    dependsOn(tasks.shadowJar)
 }
 
 tasks.test {
