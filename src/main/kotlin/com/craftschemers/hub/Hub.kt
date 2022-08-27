@@ -24,7 +24,7 @@ class Hub : JavaPlugin() {
     }
 
     private fun setupMinigames() {
-        this.server.pluginManager.registerEvents(Events(), this)
+        server.pluginManager.registerEvents(Events(), this)
     }
 
 }
