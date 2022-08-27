@@ -18,6 +18,7 @@ repositories {
 dependencies {
     compileOnly(spigotApi)
 
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.10")
     testImplementation("com.github.seeseemelk:MockBukkit-v1.18:2.2.0")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.25")
@@ -29,6 +30,22 @@ tasks.test {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "17"
+}
+
+tasks.withType<Jar> {
+    // Otherwise you'll get a "No main manifest attribute" error
+    manifest {
+        attributes["Main-Class"] = "com.craftschemers.hub.Hub"
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    // To add all of the dependencies
+    from(sourceSets.main.get().output)
+
+    dependsOn(configurations.runtimeClasspath)
+    from({
+        configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
+    })
 }
 
 java {
