@@ -1,4 +1,3 @@
 package com.craftschemers.hub.managers
 
-class HubMinigameManager {
-}
+class HubMinigameManager
