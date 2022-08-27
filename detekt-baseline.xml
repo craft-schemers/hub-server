@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues></ManuallySuppressedIssues>
+  <CurrentIssues>
+    <ID>UnusedPrivateMember:HubPlayer.kt$HubPlayer$player: Player</ID>
+  </CurrentIssues>
+</SmellBaseline>
