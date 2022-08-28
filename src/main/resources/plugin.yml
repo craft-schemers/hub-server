@@ -3,6 +3,7 @@ author: CraftSchemers
 version: 1.0.0
 
 name: Hub
+description: Hub Plugin
 commands:
   hub:
     description: The Hub command.
