@@ -8,9 +8,7 @@ import com.craftschemers.hub.minigame.OneInTheQuiver
 
 class HubMinigameManager {
 
-    private val minigameServers = mutableMapOf<GameType, List<Minigame>>(
-        GameType.ONE_IN_THE_QUIVER to mutableListOf()
-    )
+    private val minigameServers = mutableMapOf<GameType, List<Minigame>>()
 
     fun addPlayerToMinigame(player: HubPlayer, gameType: GameType) {
         // make sure a server is available
@@ -23,11 +21,19 @@ class HubMinigameManager {
             game.addPlayer(player)
             minigameServers[gameType] = gameServer.orEmpty() + mutableListOf(game)
         } else {
-            gameServer.find { it.state == GameState.LOBBY } ?.addPlayer(player)
+            gameServer.find { it.state == GameState.LOBBY }?.addPlayer(player)
         }
 
         player.game = gameType
 
+    }
+
+    private fun getGamePlayerIsIn(player: HubPlayer): Minigame? =
+        player.game?.let { gameType -> minigameServers[gameType]?.find { it.hasPlayer(player) } }
+
+    fun removePlayerFromMinigame(player: HubPlayer) {
+        val game = getGamePlayerIsIn(player) ?: return
+        game.handlePlayerLeave(player)
     }
 
 }

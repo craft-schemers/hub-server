@@ -3,6 +3,7 @@ package com.craftschemers.hub
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
+import org.bukkit.event.player.PlayerQuitEvent
 
 class Events : Listener {
 
@@ -17,6 +18,11 @@ class Events : Listener {
     @EventHandler
     fun onPlayerConnect(event: PlayerJoinEvent) {
         playerDataManager.addPlayer(event.player)
+    }
+
+    @EventHandler
+    fun onPlayerDisconnect(event: PlayerQuitEvent) {
+        playerDataManager.removePlayer(event.player)
     }
 
 }
