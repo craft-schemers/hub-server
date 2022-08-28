@@ -49,11 +49,6 @@ java {
 
 bukkit {
     apiVersion = "1.19"
-    meta {
-        name.set("Hub")
-        description.set("Hub Server")
-        main.set("com.craftschemers.hub.Hub")
-    }
     server {
         coreType = ru.endlesscode.bukkitgradle.server.extension.CoreType.PAPER
         eula = true

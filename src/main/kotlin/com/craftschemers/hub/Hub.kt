@@ -1,5 +1,7 @@
 package com.craftschemers.hub
 
+import com.craftschemers.hub.managers.HubCommandManager
+import com.craftschemers.hub.managers.HubPlayerManager
 import org.bukkit.plugin.java.JavaPlugin
 
 class Hub : JavaPlugin() {
@@ -17,6 +19,7 @@ class Hub : JavaPlugin() {
     override fun onEnable() {
         plugin = this
         setupMinigames()
+        setupCommands()
     }
 
     override fun onDisable() {
@@ -25,6 +28,9 @@ class Hub : JavaPlugin() {
 
     private fun setupMinigames() {
         server.pluginManager.registerEvents(Events(), this)
+    }
+    private fun setupCommands() {
+        getCommand("hub")?.setExecutor(HubCommandManager)
     }
 
 }
