@@ -18,8 +18,4 @@ class HubPlayerManager {
 
     fun getPlayer(uuid: UUID) = players[uuid]
 
-    fun joinMinigame(player: HubPlayer) {
-
-    }
-
 }

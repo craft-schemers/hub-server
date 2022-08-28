@@ -4,8 +4,5 @@ import com.craftschemers.hub.HubPlayer
 
 abstract class Minigame(val name: String, val type: GameType) {
     var state = GameState.LOBBY
-    fun addPlayer(player: HubPlayer) {
-
-    }
     abstract fun start()
 }
