@@ -1,6 +1,5 @@
 package com.craftschemers.hub.managers
 
-import com.craftschemers.hub.commands.ICommand
 import com.craftschemers.hub.commands.JoinCommand
 import com.craftschemers.hub.minigame.Minigame
 import org.bukkit.ChatColor
@@ -8,17 +7,11 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 
-class HubCommandManager : CommandExecutor {
-    companion object {
-        private val commands = mutableMapOf<String, ICommand>()
-        init {
-            fun registerCommand(command: ICommand) {
-                commands[command.name] = command
-            }
-            registerCommand(JoinCommand())
-            // ...
-        }
-    }
+object HubCommandManager : CommandExecutor {
+
+    private val commands = mapOf(
+        JoinCommand.name to JoinCommand,
+    )
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (args.isEmpty()) {
