@@ -4,8 +4,10 @@ import com.craftschemers.hub.HubPlayer
 
 abstract class Minigame(val name: String, val type: GameType) {
     var state = GameState.LOBBY
+    private val players = mutableListOf<HubPlayer>()
+
     fun addPlayer(player: HubPlayer) {
-        // implement later
+        players += player
     }
     abstract fun start()
 }

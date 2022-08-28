@@ -3,6 +3,8 @@ package com.craftschemers.hub.commands
 import com.craftschemers.hub.Hub
 import com.craftschemers.hub.minigame.Minigame
 import com.craftschemers.hub.minigame.getGameTypeFromName
+import com.craftschemers.hub.minigame.sendErrorMessage
+import com.craftschemers.hub.minigame.sendSuccessMessage
 import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
@@ -24,23 +26,27 @@ object JoinCommand : ICommand {
 
     override fun onCommand(sender: CommandSender, minigame: Minigame?, label: String, args: Array<String>): Boolean {
         if (sender !is Player) {
-            sender.sendMessage("${ChatColor.RED}You must be a player to execute this command!")
+            sender.sendErrorMessage("You must be a player to execute this command!")
             return true
         }
 
         if (args.isEmpty() || args.size != 1) {
-            sender.sendMessage("${ChatColor.RED}Please provide a game you would like to join!")
+            sender.sendErrorMessage("Please provide a game you would like to join!")
             return true
         }
 
         val game = getGameTypeFromName(args[0]) ?: run {
-            sender.sendMessage("${ChatColor.RED}Invalid game!")
+            sender.sendErrorMessage("Invalid game!")
             return true
         }
 
         playerManager.getPlayer(sender.uniqueId)?.let { gameManager.addPlayerToMinigame(it, game) }
-            ?: sender.sendMessage("${ChatColor.RED}Something went wrong.")
+            ?: run {
+                sender.sendErrorMessage("Something went wrong.")
+                return true
+            }
 
+        sender.sendSuccessMessage("Joined!")
         return true
     }
 
