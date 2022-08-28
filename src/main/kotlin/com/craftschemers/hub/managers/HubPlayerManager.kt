@@ -16,6 +16,8 @@ class HubPlayerManager {
 
     fun hasPlayer(uuid: UUID) = uuid in players
 
+    fun getPlayer(uuid: UUID) = players[uuid]
+
     fun joinMinigame(player: HubPlayer) {
 
     }

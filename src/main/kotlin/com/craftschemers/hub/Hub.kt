@@ -1,6 +1,7 @@
 package com.craftschemers.hub
 
 import com.craftschemers.hub.managers.HubCommandManager
+import com.craftschemers.hub.managers.HubMinigameManager
 import com.craftschemers.hub.managers.HubPlayerManager
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -15,6 +16,7 @@ class Hub : JavaPlugin() {
         lateinit var plugin: Hub
     }
     val playerManger = HubPlayerManager()
+    val gameManager = HubMinigameManager()
 
     override fun onEnable() {
         plugin = this

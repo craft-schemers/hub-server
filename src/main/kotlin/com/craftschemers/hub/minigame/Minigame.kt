@@ -1,3 +1,11 @@
 package com.craftschemers.hub.minigame
 
-class Minigame
+import com.craftschemers.hub.HubPlayer
+
+abstract class Minigame(val name: String, val type: GameType) {
+    var state = GameState.LOBBY
+    fun addPlayer(player: HubPlayer) {
+
+    }
+    abstract fun start()
+}

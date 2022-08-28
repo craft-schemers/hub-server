@@ -13,7 +13,7 @@ object HubCommandManager : CommandExecutor {
         JoinCommand.name to JoinCommand,
     )
 
-    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
+    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>): Boolean {
         if (args.isEmpty()) {
             sender.sendMessage("Welcome to the ${ChatColor.GOLD}Hub Plugin!")
             return true
@@ -22,7 +22,7 @@ object HubCommandManager : CommandExecutor {
             sender.sendMessage("${ChatColor.RED}Invalid command!")
             return true
         }
-        commands[args[0]]?.onCommand(sender, Minigame(), label, arrayOf())
+        commands[args[0]]?.onCommand(sender, null, label, args.copyOfRange(1, args.size))
         return true
     }
 }
