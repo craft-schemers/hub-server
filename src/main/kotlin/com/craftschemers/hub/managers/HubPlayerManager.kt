@@ -3,14 +3,21 @@ package com.craftschemers.hub.managers
 import com.craftschemers.hub.HubPlayer
 import org.bukkit.GameMode
 import org.bukkit.entity.Player
+import java.util.*
 
 class HubPlayerManager {
-    private var players = mutableMapOf<String, HubPlayer>()
+    private val players = mutableMapOf<UUID, HubPlayer>()
 
     fun addPlayer(player: Player) {
-        players[player.uniqueId.toString()] = HubPlayer(player)
+        players[player.uniqueId] = HubPlayer(player)
         player.gameMode = GameMode.ADVENTURE
         player.inventory.clear()
+    }
+
+    fun hasPlayer(uuid: UUID) = uuid in players
+
+    fun joinMinigame(player: HubPlayer) {
+
     }
 
 }
