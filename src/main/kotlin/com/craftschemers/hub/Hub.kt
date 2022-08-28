@@ -29,9 +29,8 @@ class Hub : JavaPlugin() {
     private fun setupMinigames() {
         server.pluginManager.registerEvents(Events(), this)
     }
-
     private fun setupCommands() {
-        getCommand("hub")?.setExecutor(HubCommandManager())
+        getCommand("hub")?.setExecutor(HubCommandManager)
     }
 
 }
