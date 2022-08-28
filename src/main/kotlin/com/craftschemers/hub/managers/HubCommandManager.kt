@@ -25,7 +25,7 @@ class HubCommandManager : CommandExecutor {
             sender.sendMessage("Welcome to the ${ChatColor.GOLD}Hub Plugin!")
             return true
         }
-        if (!commands.containsKey(args[0])) {
+        if (args[0] !in commands) {
             sender.sendMessage("${ChatColor.RED}Invalid command!")
             return true
         }
