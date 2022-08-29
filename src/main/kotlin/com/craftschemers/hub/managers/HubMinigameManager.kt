@@ -13,7 +13,8 @@ class HubMinigameManager {
     fun addPlayerToMinigame(player: HubPlayer, gameType: GameType) {
         // make sure a server is available
         val gameServer = minigameServers[gameType]
-        if (gameServer == null || gameServer.none { it.state == GameState.LOBBY }) {
+        val nonStartedGame = gameServer?.find { it.state == GameState.LOBBY }
+        if (gameServer == null || nonStartedGame == null) {
             // make a new server
             val game = when (gameType) {
                 GameType.ONE_IN_THE_QUIVER -> OneInTheQuiver()
@@ -21,7 +22,7 @@ class HubMinigameManager {
             game.addPlayer(player)
             minigameServers[gameType] = gameServer.orEmpty() + mutableListOf(game)
         } else {
-            gameServer.find { it.state == GameState.LOBBY }?.addPlayer(player)
+            nonStartedGame.addPlayer(player)
         }
 
         player.game = gameType
