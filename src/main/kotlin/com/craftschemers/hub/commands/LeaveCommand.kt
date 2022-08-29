@@ -5,18 +5,17 @@ import com.craftschemers.hub.minigame.Minigame
 import com.craftschemers.hub.minigame.getGameTypeFromName
 import com.craftschemers.hub.minigame.sendErrorMessage
 import com.craftschemers.hub.minigame.sendSuccessMessage
-import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
-object JoinCommand : ICommand {
+object LeaveCommand : ICommand {
 
-    override val name = "join"
+    override val name = "leave"
     override val aliases = null
     override val canBeConsole = false
-    override val description = "Use this command to join a minigame"
+    override val description = "Use this command to leave a minigame"
     override val parameters = null
-    override val usage = arrayOf("/hub join <Minigame>")
+    override val usage = arrayOf("/hub leave <Minigame>")
     override val permissionMessage = "Permission message"
     override val permission = "permission"
 
@@ -28,23 +27,20 @@ object JoinCommand : ICommand {
             return true
         }
 
-        if (args.size != 1) {
-            sender.sendErrorMessage("Please provide a game you would like to join!")
+        if (args.isNotEmpty()) {
+            sender.sendErrorMessage("Incorrect command usage!")
             return true
         }
 
-        val game = getGameTypeFromName(args[0]) ?: run {
-            sender.sendErrorMessage("Invalid game!")
+        val hubPlayer = plugin.playerManger.getPlayer(sender.uniqueId)
+
+        if (hubPlayer?.game == null) {
+            sender.sendErrorMessage("You must be in a game to leave!")
             return true
         }
 
-        plugin.playerManger.getPlayer(sender.uniqueId)?.let { plugin.gameManager.addPlayerToMinigame(it, game) }
-            ?: run {
-                sender.sendErrorMessage("Something went wrong.")
-                return true
-            }
-
-        sender.sendSuccessMessage("Joined!")
+        plugin.gameManager.removePlayerFromMinigame(hubPlayer)
+        sender.sendSuccessMessage("Left!")
         return true
     }
 

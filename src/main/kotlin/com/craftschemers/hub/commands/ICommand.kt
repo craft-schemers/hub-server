@@ -14,7 +14,7 @@ interface ICommand {
     val permissionMessage: String
     val permission: String
 
-    fun onCommand(sender: CommandSender, minigame: Minigame, label: String, args: Array<String>): Boolean
+    fun onCommand(sender: CommandSender, minigame: Minigame?, label: String, args: Array<String>): Boolean
 
     fun onTabComplete(
         sender: CommandSender,
