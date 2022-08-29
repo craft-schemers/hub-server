@@ -15,11 +15,16 @@ class Hub : JavaPlugin() {
     companion object {
         lateinit var plugin: Hub
     }
-    val playerManger = HubPlayerManager()
-    val gameManager = HubMinigameManager()
+
+    lateinit var playerManger: HubPlayerManager
+    lateinit var gameManager: HubMinigameManager
+    private lateinit var commandManager: HubCommandManager
 
     override fun onEnable() {
         plugin = this
+        playerManger = HubPlayerManager()
+        gameManager = HubMinigameManager()
+        commandManager = HubCommandManager()
         setupMinigames()
         setupCommands()
     }
@@ -32,7 +37,7 @@ class Hub : JavaPlugin() {
         server.pluginManager.registerEvents(Events(), this)
     }
     private fun setupCommands() {
-        getCommand("hub")?.setExecutor(HubCommandManager)
+        getCommand("hub")?.setExecutor(commandManager)
     }
 
 }

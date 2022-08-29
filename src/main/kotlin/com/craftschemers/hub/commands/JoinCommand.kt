@@ -21,8 +21,6 @@ object JoinCommand : ICommand {
     override val permission = "permission"
 
     private val plugin = Hub.plugin
-    private val gameManager = plugin.gameManager
-    private val playerManager = plugin.playerManger
 
     override fun onCommand(sender: CommandSender, minigame: Minigame?, label: String, args: Array<String>): Boolean {
         if (sender !is Player) {
@@ -40,7 +38,7 @@ object JoinCommand : ICommand {
             return true
         }
 
-        playerManager.getPlayer(sender.uniqueId)?.let { gameManager.addPlayerToMinigame(it, game) }
+        plugin.playerManger.getPlayer(sender.uniqueId)?.let { plugin.gameManager.addPlayerToMinigame(it, game) }
             ?: run {
                 sender.sendErrorMessage("Something went wrong.")
                 return true

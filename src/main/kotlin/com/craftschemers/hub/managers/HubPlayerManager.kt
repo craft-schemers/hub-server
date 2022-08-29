@@ -8,7 +8,7 @@ import java.util.*
 
 class HubPlayerManager {
     private val players = mutableMapOf<UUID, HubPlayer>()
-    private val gameManager = Hub.plugin.gameManager
+    private val plugin = Hub.plugin
 
     fun addPlayer(player: Player) {
         players[player.uniqueId] = HubPlayer(player)
@@ -18,7 +18,7 @@ class HubPlayerManager {
 
     fun removePlayer(player: Player): Boolean {
         val hubPlayer = players[player.uniqueId] ?: return false
-        gameManager.removePlayerFromMinigame(hubPlayer)
+        plugin.gameManager.removePlayerFromMinigame(hubPlayer)
         return true
     }
 
