@@ -28,7 +28,7 @@ object JoinCommand : ICommand {
             return true
         }
 
-        if (args.isEmpty() || args.size != 1) {
+        if (args.size != 1) {
             sender.sendErrorMessage("Please provide a game you would like to join!")
             return true
         }
