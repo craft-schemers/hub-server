@@ -14,7 +14,7 @@ class HubMinigameManager {
         // make sure a server is available
         val gameServer = minigameServers[gameType]
         val nonStartedGame = gameServer?.find { it.state == GameState.LOBBY }
-        if (gameServer == null || nonStartedGame == null) {
+        if (nonStartedGame == null) {
             // make a new server
             val game = when (gameType) {
                 GameType.ONE_IN_THE_QUIVER -> OneInTheQuiver()
