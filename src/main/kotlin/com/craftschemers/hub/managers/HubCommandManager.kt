@@ -2,7 +2,8 @@ package com.craftschemers.hub.managers
 
 import com.craftschemers.hub.commands.JoinCommand
 import com.craftschemers.hub.commands.LeaveCommand
-import com.craftschemers.hub.minigame.Minigame
+import com.craftschemers.hub.commands.PrintPlayersInGameCommand
+import com.craftschemers.hub.commands.set.SetCommand
 import org.bukkit.ChatColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -13,6 +14,8 @@ class HubCommandManager : CommandExecutor {
     private val commands = mapOf(
         JoinCommand.name to JoinCommand,
         LeaveCommand.name to LeaveCommand,
+        SetCommand.name to SetCommand,
+        PrintPlayersInGameCommand.name to PrintPlayersInGameCommand
     )
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>): Boolean {

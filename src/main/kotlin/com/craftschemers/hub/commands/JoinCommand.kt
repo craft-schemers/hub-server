@@ -4,8 +4,6 @@ import com.craftschemers.hub.Hub
 import com.craftschemers.hub.minigame.Minigame
 import com.craftschemers.hub.minigame.getGameTypeFromName
 import com.craftschemers.hub.minigame.sendErrorMessage
-import com.craftschemers.hub.minigame.sendSuccessMessage
-import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
@@ -38,13 +36,23 @@ object JoinCommand : ICommand {
             return true
         }
 
+        val hubPlayer = plugin.playerManger.getPlayer(sender.uniqueId)
+        if (hubPlayer == null) {
+            sender.sendErrorMessage("Something went wrong!")
+            return true
+        }
+
+        if (hubPlayer.game != null) {
+            sender.sendErrorMessage("You're already in a game!")
+            return true
+        }
+
         plugin.playerManger.getPlayer(sender.uniqueId)?.let { plugin.gameManager.addPlayerToMinigame(it, game) }
             ?: run {
                 sender.sendErrorMessage("Something went wrong.")
                 return true
             }
 
-        sender.sendSuccessMessage("Joined!")
         return true
     }
 
