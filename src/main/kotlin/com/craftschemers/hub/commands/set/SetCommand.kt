@@ -31,7 +31,6 @@ object SetCommand : ICommand {
             return true
         }
 
-        val gameType = getGameTypeFromName(args[0])
         setCommands[args[1]]?.onCommand(sender, minigame, label, args)
         return true
     }

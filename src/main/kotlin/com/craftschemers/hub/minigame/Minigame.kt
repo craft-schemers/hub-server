@@ -62,7 +62,8 @@ abstract class Minigame(
         for (p in lobby.players) {
             p.player.sendMessage(
                 "${ChatColor.GRAY}${player.player.name}${ChatColor.YELLOW} has joined " +
-                        "(${ChatColor.AQUA}${lobby.players.size}${ChatColor.YELLOW}/${ChatColor.AQUA}$maxPlayers${ChatColor.YELLOW})!"
+                        "(${ChatColor.AQUA}${lobby.players.size}${ChatColor.YELLOW}/${ChatColor.AQUA}$maxPlayers" +
+                        "${ChatColor.YELLOW})!"
             )
         }
     }
