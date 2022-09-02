@@ -9,7 +9,7 @@ object OneInTheQuiver : Minigame(
     name = "oitq",
     displayName = "One In The Quiver",
     type = GameType.ONE_IN_THE_QUIVER,
-    minPlayers = 2,
+    minPlayers = 1,
     maxPlayers = 16,
 ) {
 

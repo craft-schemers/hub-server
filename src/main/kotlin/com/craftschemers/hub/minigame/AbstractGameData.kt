@@ -7,4 +7,5 @@ abstract class AbstractGameData {
     var state = GameState.LOBBY
 
     abstract fun addPlayer(player: HubPlayer)
+    abstract fun startGame()
 }
