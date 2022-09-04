@@ -22,15 +22,12 @@ abstract class Minigame(
         val worldName = configFile.getString("$name.lobby.world")
 
         val x = configFile.getDouble("$name.lobby.x")
+        val y = configFile.getDouble("$name.lobby.y")
         val z = configFile.getDouble("$name.lobby.z")
 
         val world = worldName?.let { Bukkit.getWorld(it) }
 
-        lobbyLocation =
-            worldName?.let {
-                world?.getHighestBlockYAt(x.toInt(), z.toInt())
-                    ?.let { it1 -> Location(world, x, it1.toDouble() + 1, z) }
-            }
+        lobbyLocation = worldName?.let { Location(world, x, y, z) }
     }
 
     open val lobbies = mutableListOf<AbstractGameData>()
