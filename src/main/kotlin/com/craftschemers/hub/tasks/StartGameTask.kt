@@ -1,15 +1,15 @@
 package com.craftschemers.hub.tasks
 
 import com.craftschemers.hub.Hub
-import com.craftschemers.hub.minigame.AbstractGameData
+import com.craftschemers.hub.minigame.Lobby
 import com.craftschemers.hub.minigame.Minigame
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 
-class StartGameTask(private val gameData: AbstractGameData, private val game: Minigame) : Runnable {
+class StartGameTask(private val gameData: Lobby, private val game: Minigame) : Runnable {
 
     private var time = 10
-    private var id = -1
+    private var id: Int? = null
     private var running = false
 
     override fun run() {
@@ -22,7 +22,7 @@ class StartGameTask(private val gameData: AbstractGameData, private val game: Mi
             return
         }
         for (player in gameData.players) {
-            player.player.sendMessage("${ChatColor.YELLOW}Game starting in ${ChatColor.RED}$time " +
+            player.sendMessage("${ChatColor.YELLOW}Game starting in ${ChatColor.RED}$time " +
                     "${ChatColor.YELLOW}seconds!")
         }
         time--
@@ -35,7 +35,7 @@ class StartGameTask(private val gameData: AbstractGameData, private val game: Mi
     }
 
     private fun stop() {
-        if (id != -1 && running) Bukkit.getServer().scheduler.cancelTask(id)
+        if (id != null && running) id?.let { Bukkit.getServer().scheduler.cancelTask(it) }
         running = false
     }
 

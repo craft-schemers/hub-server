@@ -1,12 +1,12 @@
 package com.craftschemers.hub.minigame.oitq
 
 import com.craftschemers.hub.HubPlayer
-import com.craftschemers.hub.minigame.AbstractGameData
+import com.craftschemers.hub.minigame.Lobby
 import com.craftschemers.hub.minigame.GameState
 import com.craftschemers.hub.minigame.GameType
 import com.craftschemers.hub.tasks.StartGameTask
 
-class OneInTheQuiverGameData : AbstractGameData() {
+class OneInTheQuiverLobby : Lobby() {
 
     private val startGameTask = StartGameTask(this, OneInTheQuiver)
 
@@ -20,6 +20,8 @@ class OneInTheQuiverGameData : AbstractGameData() {
                 startGameTask.start()
             }
 
+        } else {
+            player.sendErrorMessage("This game cannot currently be joined!")
         }
     }
 

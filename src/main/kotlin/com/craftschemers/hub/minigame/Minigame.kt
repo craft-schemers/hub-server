@@ -30,12 +30,14 @@ abstract class Minigame(
         lobbyLocation = worldName?.let { Location(world, x, y, z) }
     }
 
-    open val lobbies = mutableListOf<AbstractGameData>()
+    open val lobbies = mutableListOf<Lobby>()
 
     fun addPlayer(player: HubPlayer) {
-        println("attempting to add $player")
-        if (maxServers == 0) return
-        val lobby: AbstractGameData?
+        if (maxServers == 0) {
+            player.sendErrorMessage("$displayName has no active lobbies!")
+            return
+        }
+        val lobby: Lobby?
         if (lobbies.size == 0) {
             lobby = createNewLobby()
             lobby.addPlayer(player)
@@ -56,8 +58,8 @@ abstract class Minigame(
                 lobby.addPlayer(player)
             }
         }
-        for (p in lobby.players) {
-            p.player.sendMessage(
+        lobby.players.forEach {
+            it.player.sendMessage(
                 "${ChatColor.GRAY}${player.player.name}${ChatColor.YELLOW} has joined " +
                         "(${ChatColor.AQUA}${lobby.players.size}${ChatColor.YELLOW}/${ChatColor.AQUA}$maxPlayers" +
                         "${ChatColor.YELLOW})!"
@@ -65,7 +67,7 @@ abstract class Minigame(
         }
     }
 
-    abstract fun createNewLobby(): AbstractGameData
+    abstract fun createNewLobby(): Lobby
     abstract fun handlePlayerLeave(player: HubPlayer)
 
 }

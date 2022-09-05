@@ -2,7 +2,7 @@ package com.craftschemers.hub.minigame
 
 import com.craftschemers.hub.HubPlayer
 
-abstract class AbstractGameData {
+abstract class Lobby {
     val players = mutableListOf<HubPlayer>()
     var state = GameState.LOBBY
 

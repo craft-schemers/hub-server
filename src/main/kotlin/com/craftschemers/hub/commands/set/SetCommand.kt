@@ -32,6 +32,7 @@ object SetCommand : ICommand {
         }
 
         setCommands[args[1]]?.onCommand(sender, minigame, label, args)
+            ?: sender.sendErrorMessage("Not a valid command!")
         return true
     }
 

@@ -17,7 +17,7 @@ class HubMinigameManager {
 
         if (gameServer != null) {
             if (gameServer.lobbyLocation == null) {
-                player.player.sendErrorMessage("Game ${gameServer.displayName} does not have a lobby set up!")
+                player.sendErrorMessage("Game ${gameServer.displayName} does not have a lobby set up!")
             } else {
                 gameServer.addPlayer(player)
                 player.game = gameType

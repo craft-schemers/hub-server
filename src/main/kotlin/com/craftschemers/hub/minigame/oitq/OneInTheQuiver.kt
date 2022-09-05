@@ -1,7 +1,7 @@
 package com.craftschemers.hub.minigame.oitq
 
 import com.craftschemers.hub.HubPlayer
-import com.craftschemers.hub.minigame.AbstractGameData
+import com.craftschemers.hub.minigame.Lobby
 import com.craftschemers.hub.minigame.GameType
 import com.craftschemers.hub.minigame.Minigame
 
@@ -19,8 +19,8 @@ object OneInTheQuiver : Minigame(
         lobby.players.remove(player)
     }
 
-    override fun createNewLobby(): AbstractGameData {
-        return OneInTheQuiverGameData()
+    override fun createNewLobby(): Lobby {
+        return OneInTheQuiverLobby()
     }
 
 }

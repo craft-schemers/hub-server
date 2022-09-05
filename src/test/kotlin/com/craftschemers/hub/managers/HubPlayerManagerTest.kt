@@ -3,7 +3,7 @@ package com.craftschemers.hub.managers
 import assertk.assertThat
 import assertk.assertions.*
 import com.craftschemers.hub.BukkitTestCase
-import com.craftschemers.hub.minigame.AbstractGameData
+import com.craftschemers.hub.minigame.Lobby
 import com.craftschemers.hub.minigame.GameType
 import com.craftschemers.hub.minigame.Minigame
 import org.bukkit.GameMode
@@ -44,7 +44,7 @@ class HubPlayerManagerTest : BukkitTestCase() {
             assertThat(hubPlayer.game).isEqualTo(GameType.ONE_IN_THE_QUIVER)
             assertThat(hubMinigameManager.minigames[GameType.ONE_IN_THE_QUIVER]?.lobbies)
                 .isNotNull()
-                .exactly(1) { it.prop(AbstractGameData::players).containsOnly(hubPlayer) }
+                .exactly(1) { it.prop(Lobby::players).containsOnly(hubPlayer) }
         }
     }
 
@@ -65,7 +65,7 @@ class HubPlayerManagerTest : BukkitTestCase() {
             assertThat(hubPlayer.game).isNull()
             assertThat(hubMinigameManager.minigames.values).each { game ->
                 game.prop(Minigame::lobbies)
-                    .each { lobby -> lobby.prop(AbstractGameData::players).doesNotContain(hubPlayer) }
+                    .each { lobby -> lobby.prop(Lobby::players).doesNotContain(hubPlayer) }
             }
         }
     }
