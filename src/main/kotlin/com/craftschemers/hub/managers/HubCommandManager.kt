@@ -15,7 +15,7 @@ class HubCommandManager : CommandExecutor {
         JoinCommand.name to JoinCommand,
         LeaveCommand.name to LeaveCommand,
         SetCommand.name to SetCommand,
-        PrintPlayersInGameCommand.name to PrintPlayersInGameCommand
+        PrintPlayersInGameCommand.name to PrintPlayersInGameCommand,
     )
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<String>): Boolean {
