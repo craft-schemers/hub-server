@@ -8,7 +8,7 @@ import com.craftschemers.hub.minigame.sendErrorMessage
 class HubMinigameManager {
 
     val minigames = mapOf(
-        GameType.ONE_IN_THE_QUIVER to OneInTheQuiver
+        GameType.ONE_IN_THE_QUIVER to OneInTheQuiver,
     )
 
     fun addPlayerToMinigame(player: HubPlayer, gameType: GameType) {
