@@ -18,7 +18,7 @@ object PrintPlayersInGameCommand : ICommand {
 
     override fun onCommand(sender: CommandSender, minigame: Minigame?, label: String, args: Array<String>): Boolean {
         val gameManager = Hub.plugin.gameManager
-        for (value in gameManager.minigames.values) {
+        gameManager.minigames.values.forEach { value ->
             sender.sendMessage("${ChatColor.WHITE}${value.displayName} ${ChatColor.GOLD}has the following lobbies:")
             value.lobbies.forEachIndexed { index, lobby ->
                 sender.sendMessage("${ChatColor.GOLD}Lobby ${ChatColor.GREEN}${index}: ${lobby.players}")
