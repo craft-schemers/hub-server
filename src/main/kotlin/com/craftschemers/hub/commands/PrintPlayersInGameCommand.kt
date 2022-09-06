@@ -20,7 +20,7 @@ object PrintPlayersInGameCommand : ICommand {
         val gameManager = Hub.plugin.gameManager
         for (value in gameManager.minigames.values) {
             sender.sendMessage("${ChatColor.WHITE}${value.displayName} ${ChatColor.GOLD}has the following lobbies:")
-            for ((index, lobby) in value.lobbies.withIndex()) {
+            value.lobbies.forEachIndexed { index, lobby ->
                 sender.sendMessage("${ChatColor.GOLD}Lobby ${ChatColor.GREEN}${index}: ${lobby.players}")
             }
         }
