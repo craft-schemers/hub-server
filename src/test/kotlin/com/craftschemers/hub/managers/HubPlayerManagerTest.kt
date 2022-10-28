@@ -2,17 +2,13 @@ package com.craftschemers.hub.managers
 
 import assertk.assertThat
 import assertk.assertions.*
-import be.seeseemelk.mockbukkit.MockBukkit
-import be.seeseemelk.mockbukkit.ServerMock
 import com.craftschemers.hub.BukkitTestCase
-import com.craftschemers.hub.Hub
-import com.craftschemers.hub.HubPlayer
+import com.craftschemers.hub.minigame.Lobby
 import com.craftschemers.hub.minigame.GameType
 import com.craftschemers.hub.minigame.Minigame
 import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 class HubPlayerManagerTest : BukkitTestCase() {
@@ -34,6 +30,25 @@ class HubPlayerManagerTest : BukkitTestCase() {
     }
 
     @Test
+    fun `verify player actually joins minigame`() {
+        val player = server.addPlayer()
+        val hubPlayerManager = plugin.playerManger
+        hubPlayerManager.addPlayer(player)
+
+        val hubPlayer = hubPlayerManager.getPlayer(player.uniqueId)
+
+        assertThat(hubPlayer).isNotNull()
+        val hubMinigameManager = plugin.gameManager
+        if (hubPlayer != null) {
+            hubMinigameManager.addPlayerToMinigame(hubPlayer, GameType.ONE_IN_THE_QUIVER)
+            assertThat(hubPlayer.game).isEqualTo(GameType.ONE_IN_THE_QUIVER)
+            assertThat(hubMinigameManager.minigames[GameType.ONE_IN_THE_QUIVER]?.lobbies)
+                .isNotNull()
+                .exactly(1) { it.prop(Lobby::players).containsOnly(hubPlayer) }
+        }
+    }
+
+    @Test
     fun `verify player actually leaves game`() {
         val player = server.addPlayer()
         val hubPlayerManager = plugin.playerManger
@@ -48,10 +63,9 @@ class HubPlayerManagerTest : BukkitTestCase() {
             hubMinigameManager.addPlayerToMinigame(hubPlayer, GameType.ONE_IN_THE_QUIVER)
             hubMinigameManager.removePlayerFromMinigame(hubPlayer)
             assertThat(hubPlayer.game).isNull()
-            assertThat(hubMinigameManager.minigameServers.values).each { servers ->
-                servers.each {
-                    it.prop(Minigame::players).doesNotContain(hubPlayer)
-                }
+            assertThat(hubMinigameManager.minigames.values).each { game ->
+                game.prop(Minigame::lobbies)
+                    .each { lobby -> lobby.prop(Lobby::players).doesNotContain(hubPlayer) }
             }
         }
     }
